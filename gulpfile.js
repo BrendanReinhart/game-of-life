@@ -23,7 +23,7 @@ var gulp = require('gulp'),
 // Our task config
 var runList = [
     'styles',
-//    'images',
+   'images',
     'scripts',
     'html'
 ];
