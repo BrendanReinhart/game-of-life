@@ -4,8 +4,9 @@ var options = {
 }
 
 function loadGame() {
+    $('.game-board').on('click', '.tile', clickTile);
     generateTiles();
-    $('.go-button-wrapper').html('<button class="go-button">GO</button>');
+    $('.go-button-wrapper').html('<button class="start-game">START GAME</button>');
 }
 
 function generateTiles() {
@@ -15,7 +16,7 @@ function generateTiles() {
         let column = $('<div class="col-wrapper"></div>');
         for(j=0; j<options.sizeY; j++) {
             var coord = 100*i+j;
-            let row = $('<div class="tile" data-coords="'+coord+'"></div>');
+            let row = $('<div class="tile selectable" data-coords="'+coord+'"></div>');
             row.appendTo(column);
             tileIDs.push(coord);
         }
@@ -25,4 +26,10 @@ function generateTiles() {
 
 function clickTile() {
     $(this).toggleClass('selected-tile');
+}
+
+function startGame() {
+    $('.game-board').off('click', '.tile', clickTile);
+    $('.tile').toggleClass('selectable');
+    console.log('starting game!');
 }
