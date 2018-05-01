@@ -1,5 +1,8 @@
-function testTest(){
-    console.log('Test file loaded.')
-    return 1;
-}
-testTest();
+var tileIDs = [];
+// var tileNumVals = {};
+
+jQuery(document).ready(function() {
+    loadGame();
+});
+
+$('.game-board').on('click', '.tile', clickTile);
