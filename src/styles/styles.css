@@ -32,6 +32,6 @@ body {
 .tile.selectable:hover {
     background-color: rgb(194, 232, 250);
 }
-.tile.selected-tile {
+.tile.alive-tile {
     background-color: black;
 }
