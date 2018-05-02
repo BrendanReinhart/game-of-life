@@ -4,13 +4,22 @@ var options = {
 }
 
 function loadGame() {
+    //TODO: use some neat transitions to show rules then launch game board:
+    // transition show rules (one by one);
+    // transition rules div width to be what they are normally.
+        // meanwhile transition board to slide open from center:
+            // transition width
+            // transition border opacity
+            // transition tiles opacity
+    // transition go button
+
     $('.game-board').on('click', '.tile', clickTile);
     generateTiles();
     $('.go-button-wrapper').html('<button class="go-button">START GAME</button>');
 }
 
 function generateTiles() {
-    allIDs = new Set([]);
+    allIDs.clear();
     let gameElement = $('.game-board');
     for(i=0; i<options.sizeX; i++) {
         let column = $('<div class="col-wrapper"></div>');
@@ -19,14 +28,26 @@ function generateTiles() {
             let row = $('<div class="tile selectable" data-coords="'+coord+'"></div>');
             row.appendTo(column);
             allIDs.add(coord);
+            deadIDs.add(coord);
         }
         column.appendTo(gameElement);
     }
-    console.log('all IDs: ', allIDs)
+    console.log('tile generation complete. All IDs: ', allIDs);
 };
 
 function clickTile() {
     $(this).toggleClass('alive-tile');
+    if($(this).hasClass('alive-tile')) {
+        console.log('this tile is now ALIVE');
+        aliveIDs.add($(this).data('coords'));
+        deadIDs.delete($(this).data('coords'));
+    } else {
+        console.log('this tile is now DEAD');
+        aliveIDs.delete($(this).data('coords'));
+        deadIDs.add($(this).data('coords'));
+    };
+    console.log('alive IDs set: ', aliveIDs);
+    console.log('dead IDs set: ', deadIDs);
 }
 
 function startGame() {
@@ -52,10 +73,8 @@ function nextGen() {
 
     // update classes with NEW DEAD IDs
     // for(let dead in newDeadIds) {
-    //      find div by id=dead;
-    //      if(hasClass('alive-tile')) {
-    //          removeClass('alive-tile')
-    //      };
+    //      find div by id=dead, and;       deadTile = $('.tile[id="'+dead+'"]');
+    //      removeClass('alive-tile')       deadTile.removeClass('alive-tile');
     // }
 
     // A way to filter entries between two sets:
