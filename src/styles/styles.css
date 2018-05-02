@@ -9,7 +9,11 @@ body {
     font-size: 16px;
     background-color: lightskyblue;
 }
-
+.main-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 .game-board {
     margin: 0 auto;
     display: inline-flex;
@@ -35,3 +39,33 @@ body {
 .tile.alive-tile {
     background-color: black;
 }
+.go-button-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 5px auto;
+}
+.go-button {
+    font-size: 1.5em;
+    cursor: pointer;
+}
+.rules, .rules-balancer {
+    width: 50%;
+}
+.rules-list {
+    padding: 5px 10px 5px 20px;
+    background-color: aliceblue;
+    border-radius: 3px;
+}
+.rules {
+    padding: 5px
+}
+li.rule {
+    margin: 10px 0;
+}
+h1 {
+    text-align: center;
+    margin: 5px auto;
+}
+/* TODO add class to game-board AFTER it's loaded (in generate tiles) to apply the black border. 
+Currently it shows while game loads. */

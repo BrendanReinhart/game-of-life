@@ -6,7 +6,7 @@ var options = {
 function loadGame() {
     $('.game-board').on('click', '.tile', clickTile);
     generateTiles();
-    $('.go-button-wrapper').html('<button class="start-game">START GAME</button>');
+    $('.go-button-wrapper').html('<button class="go-button">START GAME</button>');
 }
 
 function generateTiles() {
@@ -30,6 +30,7 @@ function clickTile() {
 }
 
 function startGame() {
+    $('.go-button-wrapper').html('');
     $('.game-board').off('click', '.tile', clickTile);
     $('.tile').toggleClass('selectable');
     console.log('starting game!');
