@@ -10,7 +10,7 @@ function loadGame() {
 }
 
 function generateTiles() {
-    tileIDs = [];
+    allIDs = new Set([]);
     let gameElement = $('.game-board');
     for(i=0; i<options.sizeX; i++) {
         let column = $('<div class="col-wrapper"></div>');
@@ -18,18 +18,61 @@ function generateTiles() {
             var coord = 100*i+j;
             let row = $('<div class="tile selectable" data-coords="'+coord+'"></div>');
             row.appendTo(column);
-            tileIDs.push(coord);
+            allIDs.add(coord);
         }
         column.appendTo(gameElement);
     }
+    console.log('all IDs: ', allIDs)
 };
 
 function clickTile() {
-    $(this).toggleClass('selected-tile');
+    $(this).toggleClass('alive-tile');
 }
 
 function startGame() {
     $('.game-board').off('click', '.tile', clickTile);
     $('.tile').toggleClass('selectable');
     console.log('starting game!');
+}
+
+function nextGen() {
+
+    // have the IDs of all ALIVE tiles
+    // have the IDs of DEAD tiles
+
+    // for each ALIVE ID, generate NEW ALIVE IDs (1) based on condition 2 (EXACTLY 2 neighbours only, which also accounts for conditions 1, 3)
+    // for each DEAD ID, generate NEW ALIVE IDs (2) based on condition 4.
+    // merge NEW ALIVE IDs (1) and (2), and fill out NEW DEAD IDs using (allIDs - NEW alive IDs).
+
+    // update classes with NEW ALIVE IDs
+    // for(let alive in newAliveIds) {
+    //      find div by id=alive, and addClass('alive-tile')
+    // }
+
+    // update classes with NEW DEAD IDs
+    // for(let dead in newDeadIds) {
+    //      find div by id=dead;
+    //      if(hasClass('alive-tile')) {
+    //          removeClass('alive-tile')
+    //      };
+    // }
+
+    // A way to filter entries between two sets:
+        //var validList = completedList.filter((item) => {
+        //   return !invalidList.has(item);
+        // })
+
+    // old ALIVE IDs = new ALIVE IDs;
+    // new ALIVE IDs = [];
+    // old DEAD IDs = new DEAD IDs;
+    // new DEAD IDs = [];
+
+
+    /* ~~~~~~~~~~~~ CONDITIONS ~~~~~~~~~~~~
+    1. Any live cell with fewer than two live neighbours DIES, as if caused by underpopulation.
+    2. Any live cell with two or three live neighbours LIVES on to the next generation.
+    3. Any live cell with more than three live neighbours DIES, as if by overpopulation.
+    4. Any dead cell with exactly three live neighbours BECOMES ALIVE, as if by reproduction.
+    */
+
 }
