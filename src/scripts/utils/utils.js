@@ -162,7 +162,7 @@ function generateCells() {
     for (x=0; x<options.sizeX; x++) {
         cellMatrix[x] = [];
         for(y=0;y<options.sizeY;y++) {
-            cellMatrix[x][y] = 0;
+            cellMatrix[x][y] = Math.floor(Math.random()+0.25); // Initialise the board with 25% randomly alive
         }
     }
 }
