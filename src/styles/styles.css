@@ -56,6 +56,7 @@ body {
     padding: 5px 10px 5px 20px;
     background-color: aliceblue;
     border-radius: 3px;
+    /* width: 220px; */
 }
 .rules {
     padding: 5px
@@ -67,5 +68,16 @@ h1 {
     text-align: center;
     margin: 5px auto;
 }
+
+.tile.test-tile {
+    background-color: yellow;
+}
+#game-window {
+    margin: 0 auto;
+    background-color: #fafafa;
+    border: 1px solid black;
+}
+
+
 /* TODO add class to game-board AFTER it's loaded (in generate tiles) to apply the black border. 
 Currently it shows while game loads. */
