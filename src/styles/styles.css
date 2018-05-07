@@ -12,17 +12,11 @@ body {
 .main-content-wrapper {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-startw;
 }
-.game-board {
-    margin: 0 auto;
-    display: inline-flex;
-    flex-direction: row;
-    border: 2px solid black;
-}
-.tile {
-    height: 7px;
-    width: 7px;
+/* .tile {
+    height: 5px;
+    width: 5px;
     border: 1px solid white;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
@@ -32,24 +26,38 @@ body {
 }
 .tile.selectable {
     cursor: pointer;
-}
-.tile.selectable:hover {
+} */
+/* .tile.selectable:hover {
     background-color: rgb(194, 232, 250);
 }
 .tile.alive-tile {
     background-color: black;
-}
+} */
 .go-button-wrapper {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin: 5px auto;
 }
-.go-button {
-    font-size: 1.5em;
+.options-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+}
+.slider-title, .slider-caption {
+    text-align: center;
+    margin: 0 5px;
+}
+.slider-caption {
+    font-size: 0.75em;
+}
+button {
+    font-size: 1.2em;
     cursor: pointer;
+    margin: 5px 5px;;
+    width: 7em;
 }
-.rules, .rules-balancer {
+.rules, {
     width: 50%;
 }
 .rules-list {
@@ -73,7 +81,7 @@ h1 {
     background-color: yellow;
 }
 #game-window {
-    margin: 0 auto;
+    margin: 0 20px;
     background-color: #fafafa;
     border: 1px solid black;
 }
