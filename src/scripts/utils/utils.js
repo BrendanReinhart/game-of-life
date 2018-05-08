@@ -16,7 +16,7 @@ function loadGame() {
 
 function startGame() {
     if (runGame === undefined) {
-        runGame = setInterval(nextGenCellMatrix, speed); //How to make this keep running if the speed is changed...?
+        runGame = setInterval(nextGenCellMatrix, speed);
         $('.go-button').text("Stop");
       } else {
         clearInterval(runGame);
@@ -64,33 +64,84 @@ function generateCells(randDec) {
 }
 
 function clickCell() {
-    // $(this).toggleClass('alive-tile');
     let x = Math.floor($(this).data('coords')/1000);
     let y = $(this).data('coords')%1000;
     cellMatrix[x][y] = 1 - cellMatrix[x][y];
 }
 
-function getNeighbourCount(xID, yID) {
+function getNeighbourCount(xID, yID) { // needs refactoring, can be simpler if using modulo to wrap edges --> eg top left neighbour: if (cellMatrix[options.sizeX%(xID-1)][options.sizeY%(yID-1)]) { aliveNeighbourCount++ }
     let aliveNeighbourCount = 0;
-    if(xID>0) {
-        if (cellMatrix[xID-1][yID-1]) { aliveNeighbourCount++ };    // Above Left
-        if (cellMatrix[xID-1][yID]) { aliveNeighbourCount++ };      // Left
-        if (cellMatrix[xID-1][yID+1]) { aliveNeighbourCount++ };    // Below Left
-    // } else {
-    //     if (cellMatrix[xID-1][yID-1]) { aliveNeighbourCount++ };    // Above Left
-    //     if (cellMatrix[xID-1][yID]) { aliveNeighbourCount++ };      // Left
-    //     if (cellMatrix[xID-1][yID+1]) { aliveNeighbourCount++ };    // Below Left
+
+    // get TOP neighbour:
+    if(yID>0) {
+        if (cellMatrix[xID][yID-1]) { aliveNeighbourCount++ };              // Above
+    } else {
+        if (cellMatrix[xID][options.sizeY-1]) { aliveNeighbourCount++ };    // Wrap Above
     }
 
-    if (cellMatrix[xID][yID-1]) { aliveNeighbourCount++ };      // Above
-    if (cellMatrix[xID][yID+1]) { aliveNeighbourCount++ };      // Below
+    // get TOP RIGHT neighbour:
+    if (yID>0 && xID<options.sizeX-1) {
+        if (cellMatrix[xID+1][yID-1]) { aliveNeighbourCount++ };
+    } else if (yID>0 && xID==options.sizeX-1) { // right col but not top row
+        if (cellMatrix[0][yID-1]) { aliveNeighbourCount++ };
+    } else if (yID==0 && xID<options.sizeX-1) { // top row but not right col
+        if (cellMatrix[xID+1][options.sizeY-1]) { aliveNeighbourCount++ };
+    } else {                                    // top right corner:
+        if (cellMatrix[0][options.sizeY-1]) { aliveNeighbourCount++ };
+    }
 
+    // get RIGHT neighbour:
     if(xID<options.sizeX-1) {
-        if (cellMatrix[xID+1][yID-1]) { aliveNeighbourCount++ };    // Above Right
-        if (cellMatrix[xID+1][yID]) { aliveNeighbourCount++ };      // Right
-        if (cellMatrix[xID+1][yID+1]) { aliveNeighbourCount++ };    // Below Right
-    // } else {
+        if (cellMatrix[xID+1][yID]) { aliveNeighbourCount++ };  // Right
+    } else {
+        if (cellMatrix[0][yID]) { aliveNeighbourCount++ };      // Wrap Right
+    }
 
+    // get BOTTOM RIGHT neighbour:
+    if (yID<options.sizeY-1 && xID<options.sizeX-1) {
+        if (cellMatrix[xID+1][yID+1]) { aliveNeighbourCount++ };
+    } else if (yID<options.sizeY-1 && xID==options.sizeX-1) {   // right col but not bottom row
+        if (cellMatrix[0][yID+1]) { aliveNeighbourCount++ };
+    } else if (yID==options.sizeY-1 && xID<options.sizeX-1) {   // bottom row but not right col
+        if (cellMatrix[xID+1][0]) { aliveNeighbourCount++ };
+    } else {                                                    // bottom right corner:
+        if (cellMatrix[0][0]) { aliveNeighbourCount++ };
+    }
+
+    // get BOTTOM neighbour:
+    if(yID<options.sizeY-1) {
+        if (cellMatrix[xID][yID+1]) { aliveNeighbourCount++ };  // Below
+    } else {
+        if (cellMatrix[xID][0]) { aliveNeighbourCount++ };      // Wrap Below
+    }
+
+    // get BOTTOM LEFT neighbour:
+    if (yID<options.sizeY-1 && xID>0) {
+        if (cellMatrix[xID-1][yID+1]) { aliveNeighbourCount++ };
+    } else if (yID<options.sizeY-1 && xID==0) {     // left col but not bottom row
+        if (cellMatrix[options.sizeX-1][yID+1]) { aliveNeighbourCount++ };
+    } else if (yID==options.sizeY-1 && xID>0) {     // bottom row but not left col
+        if (cellMatrix[xID-1][0]) { aliveNeighbourCount++ };
+    } else {                                        // bottom left corner:
+        if (cellMatrix[options.sizeX-1][0]) { aliveNeighbourCount++ };
+    }
+
+    // get LEFT neighour:
+    if(xID>0) {
+        if (cellMatrix[xID-1][yID]) { aliveNeighbourCount++ };              // Left
+    } else {
+        if (cellMatrix[options.sizeX-1][yID]) { aliveNeighbourCount++ };    // Wrap Left
+    }
+
+    // get TOP LEFT neighbour:
+    if (yID>0 && xID>0) {
+        if (cellMatrix[xID-1][yID-1]) { aliveNeighbourCount++ };
+    } else if (yID>0 && xID==0) {   // left col but not top row
+        if (cellMatrix[options.sizeX-1][yID-1]) { aliveNeighbourCount++ };
+    } else if (yID==0 && xID>0) {   // top row but not left col
+        if (cellMatrix[xID-1][options.sizeY-1]) { aliveNeighbourCount++ };
+    } else {                        // top left corner:
+        if (cellMatrix[options.sizeX-1][options.sizeY-1]) { aliveNeighbourCount++ };
     }
     return aliveNeighbourCount;
 }
