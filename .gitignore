@@ -1,4 +1,3 @@
 .idea
-dist
 *.iml
 node_modules
