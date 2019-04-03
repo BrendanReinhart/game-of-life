@@ -12,7 +12,7 @@ body {
 .main-content-wrapper {
     display: flex;
     flex-direction: row;
-    justify-content: flex-startw;
+    justify-content: flex-start;
 }
 .go-button-wrapper {
     display: flex;
@@ -38,7 +38,7 @@ button {
     margin: 5px 5px;;
     width: 7em;
 }
-.rules, {
+.rules {
     width: 50%;
 }
 .rules-list {

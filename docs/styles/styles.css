@@ -18,8 +18,8 @@ body {
     display: flex;
     -ms-flex-direction: row;
         flex-direction: row;
-    -ms-flex-pack: flex-startw;
-        justify-content: flex-startw;
+    -ms-flex-pack: start;
+        justify-content: flex-start;
 }
 .go-button-wrapper {
     display: -ms-flexbox;
@@ -51,7 +51,7 @@ button {
     margin: 5px 5px;;
     width: 7em;
 }
-.rules, {
+.rules {
     width: 50%;
 }
 .rules-list {
