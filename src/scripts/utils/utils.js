@@ -23,7 +23,7 @@ function loadGame() {
 
 function startGame() {
     if (runGame === undefined) {
-        runGame = setInterval(nextGenCellMatrix, speed);
+        runGame = setInterval(nextGenCellMatrix, (3010 - speed));
         $('.go-button').text("Stop");
     } else {
         clearInterval(runGame);
@@ -61,7 +61,7 @@ function updateRandDec() {
 
 function updateSpeed() {
     speed = Number($(this).val());
-    $('.speed-title').html('Step Speed: ' + speed / 1000 + 's');
+    $('.speed-title').html('Step Speed: ' + (3010 - speed) / 1000 + 's');
     // clearInterval(runGame);
     // runGame = undefined;
     startGame();

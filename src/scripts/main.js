@@ -5,13 +5,13 @@ let cellMatrix = [];
 let randDec = 0.25;
 let speed = 200;
 
-var canvas = document.getElementById("game-window");
-var ctx = canvas.getContext("2d"); 
+var canvas = document.getElementById('game-window');
+var ctx = canvas.getContext('2d'); 
 
 var options = {
     sizeX: 80,
     sizeY: 60
-}
+};
 
 var runGame;
 
